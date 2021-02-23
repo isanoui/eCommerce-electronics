@@ -8,7 +8,8 @@
     "server": "nodemon node_backend/server.js",
     "client": "npm start --prefix react_frontend",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "import-data": "node node_backend/seederScript.js"
+    "import-data": "node node_backend/seederScript.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix react_frontend && npm run build --prefix react_frontend"
   },
   "keywords": [],
   "author": "",

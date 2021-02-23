@@ -2,6 +2,7 @@
 require('dotenv').config()
 
 const express = require('express')
+const path = require('path')
 var cors = require('cors')
 const connectDB = require('./config/db')
 const axios = require('axios')
@@ -11,6 +12,7 @@ const Product = require('./models/Product')
 const productRoutes = require('./routes/productRoutes')
 
 const PORT = process.env.PORT || 5000
+const NODE_ENV = process.env.NODE_ENV
 
 // Connect to MongoDB database
 connectDB()
@@ -22,6 +24,17 @@ app.use(express.json())
 app.use(cors())
 
 app.use('/api/products', productRoutes)
+
+// This is so Heroku can serve our React app
+if (NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/../react_frontend/build')))
+
+  app.get('*', (req, res) => {
+    res.sendFile(
+      path.join(__dirname, '/../react_frontend', 'build', 'index.html')
+    )
+  })
+}
 
 // Fetch Amazon Bestseller data every Friday at 4:00PM
 cron.schedule('0 16 * * friday', () => {
