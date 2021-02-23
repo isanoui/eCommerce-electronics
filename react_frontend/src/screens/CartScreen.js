@@ -1,4 +1,5 @@
 import './CartScreen.css'
+import { Link } from 'react-router-dom'
 
 // Components
 import CartItem from '../components/CartItem'
@@ -19,6 +20,7 @@ const CartScreen = ({ cartData, setCartData }) => {
 
   const handleDelete = (id) => {
     const newCartData = cartData.filter((cartItem) => cartItem._id !== id)
+    // Remove id from idList to be able to re-add to cart as it's no longer a duplicate
     const newIdList = JSON.parse(localStorage.getItem('idList')).filter(
       (currId) => currId !== id
     )
@@ -42,7 +44,13 @@ const CartScreen = ({ cartData, setCartData }) => {
       <div className="cartscreen-left">
         <h2>Shopping Cart</h2>
 
-        {cartItems}
+        {cartItems.length == 0 ? (
+          <p>
+            Your cart is empty <Link to="/">Go Back</Link>
+          </p>
+        ) : (
+          cartItems
+        )}
       </div>
 
       <div className="cartscreen-right">
