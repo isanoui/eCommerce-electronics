@@ -1,0 +1,80 @@
+.sidebar {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 70%;
+    height: 100vh;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* On top of the backdrop */
+    z-index: 200;
+    /* sidebar renders off-screen */
+    transform: translateX(-100%);
+    transition: all 0.3s ease-out;
+}
+
+.sidebar.show {
+    /* sidebar transitions to its original place on screen */
+    transform: translateX(0);
+}
+
+.sidebar-links {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+}
+
+.sidebar-links > li {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-links > li > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex: 1;
+    padding: 1rem;
+    text-decoration: none;
+    color: #171717;
+    font-size: 1.6rem;
+}
+
+.sidebar-links > li > a:hover {
+    background: #171717;
+    color: #f4f4f4;
+}
+
+span {
+    display: flex;
+    align-items: center;
+    margin-left: 8px;
+}
+
+.sidebar-cart-count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 1rem;
+    width: 30px;
+    height: 30px;
+    background: #171717;
+    color: #f4f4f4;
+    border-radius: 50%;
+    float: right;
+}
+
+.sidebar-links > li > a:hover .sidebar-cart-count {
+    background: #f4f4f4;
+    color: #171717;
+}
+
+@media (min-width: 960px) {
+    .sidebar {
+        display: none;
+    }
+}

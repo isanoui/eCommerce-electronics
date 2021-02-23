@@ -1,0 +1,28 @@
+const Product = require('../models/Product')
+
+const getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find({})
+
+    return res.json(products)
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({ message: 'Server Error' })
+  }
+}
+
+const getProductById = async (req, res) => {
+  try {
+    const products = await Product.findById(req.params.id)
+
+    return res.json(products)
+  } catch (error) {
+    console.error(error)
+    return res.status(500).json({ message: 'Server Error' })
+  }
+}
+
+module.exports = {
+  getAllProducts,
+  getProductById,
+}
